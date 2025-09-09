@@ -849,7 +849,11 @@ height: 20px;
                 <h2 style="margin-bottom: 10px;">Tra cứu Đơn Hàng</h2>
                 <div class="search-order-form">
                   
-		    <input type="text" id="search-phone-number" placeholder="Nhập 3 số cuối SĐT" pattern="\d{3}" maxlength="3" title="Vui lòng nhập 3 chữ số." style="width: 200px;">
+		   <input type="text" id="search-phone-number" placeholder="Nhập tên + số" pattern="[A-Za-z0-9]{1,10}" maxlength="10" title="Vui lòng chỉ nhập chữ và số, tối đa 10 ký tự." style="width: 200px;">
+
+
+
+
                     <button id="search-order-btn">Tìm kiếm</button>  
                 </div>
 	<p style="
@@ -971,11 +975,13 @@ height: 20px;
       </div>
       <div>
         <label for="phone-number" style="font-size: 12px;">
- 	  Nhập 3 số cuối SĐT nếu mang về:<br>Hoặc số bàn nếu dùng tại quán
+ 	  Nhập tên và 3 số cuối SĐT (Bich123)
 	</label>
-        <input type="text" id="phone-number" placeholder="" required pattern="\d{3}" maxlength="3" title="Vui lòng nhập 3 chữ số cuối.">
+        <input type="text" id="phone-number" placeholder="Nhập tên + số" required pattern="[A-Za-z0-9]{1,10}" maxlength="10" title="Vui lòng chỉ nhập chữ và số, tối đa 10 ký tự." style="font-size:12px;">
+
+
         <label for="notes">Ghi chú chung cho đơn hàng:</label>
-        <textarea id="notes" placeholder="Ví dụ: Giao hàng vào buổi chiều..."></textarea>
+        <textarea id="notes" placeholder="Ví dụ: Giao hàng vào buổi chiều..." style="font-size:12px;"></textarea>
       </div>
       <button id="submit-order-cart">Xác nhận Đặt Hàng</button>
     </div>
@@ -1622,10 +1628,10 @@ toggleToppingsBtn.textContent = 'Hiện topping (bấm để mở)';
           return;
       }
 
-      if (!/^\d{3}$/.test(phoneNumber)) {
-          showCustomAlert('Vui lòng nhập 3 chữ số cuối của số điện thoại.');
-          return;
-      }
+     if (!/^[A-Za-z0-9]{1,10}$/.test(phoneNumber)) {
+    showCustomAlert('Vui lòng chỉ nhập chữ và số, tối đa 10 ký tự.');
+    return;
+}
 
       // Disable the button to prevent multiple clicks
       submitOrderCartBtn.disabled = true;
@@ -1667,10 +1673,11 @@ toggleToppingsBtn.textContent = 'Hiện topping (bấm để mở)';
     // Handle search order
     searchOrderBtn.addEventListener('click', async () => {
         const phoneNumber = searchPhoneInput.value.trim();
-        if (phoneNumber.length !== 3) {
-            showCustomAlert('Vui lòng nhập đủ 3 số cuối của số điện thoại.');
-            return;
-        }
+       if (phoneNumber.length === 0 || phoneNumber.length > 10 || !/^[A-Za-z0-9]+$/.test(phoneNumber)) {
+    showCustomAlert('Vui lòng chỉ nhập chữ và số, tối đa 10 ký tự.');
+    return;
+}
+
 
         try {
             const querySnapshot = await ordersCollection.where('phoneNumber', '==', phoneNumber).get();
