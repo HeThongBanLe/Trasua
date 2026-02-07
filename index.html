@@ -3013,8 +3013,10 @@ async function uploadFiles() {
       // Resize ảnh xuống 220x180 theo tỉ lệ gốc, giảm dung lượng
       const resizedBase64 = await resizeAndCrop(f, 330, 270, 0.9);
 
-      const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(f.name)}?ref=${branch}`;
+      //const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(f.name)}?ref=${branch}`;
+      const fileName = "tenmoi.jpg";   // ← đặt tên mày muốn ở đây
 
+      const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(fileName)}?ref=${branch}`;
       // Kiểm tra file tồn tại
       let sha;
       try {
@@ -3134,6 +3136,7 @@ async function deleteFileByName() {
 
 </body>
 </html>
+
 
 
 
