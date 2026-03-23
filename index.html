@@ -1052,7 +1052,7 @@ height: 20px;
 <!-- Chọn file ảnh -->
 <label for="fileInput" style="margin:0; font-size:12px; line-height:1;">Chọn file ảnh:</label>
 <input type="file" id="fileInput" multiple style="margin:0; padding:0; height:20px; font-size:10px; width:200px; display:block;">
-
+<input type="text" id="newfile" placeholder="Đặt tên ảnh" style="margin:0; padding:0; height:20px; font-size:10px; width:200px; display:block;">
 <!-- Nút upload -->
 <button onclick="uploadFiles()" style="margin:0; padding:2px 5px; font-size:10px; width:100px; background:#2196f3; color:white; border:none; border-radius:4px; cursor:pointer;">
   Upload
@@ -2995,7 +2995,7 @@ async function sendCancelOrderToGoogleSheet(order) {
 const username = "HeThongBanLe";
 const repo = "Trasua";
 const branch = "main";
-const tokenPrefix = "github_pat_11BWLJQDQ0JzTLwM4bS0cE_F4NZibbkB0Xc4a1KgSAt3W9QzbKGgBafWwhL6n9rVWVEOVMKGT53E"; // giữ prefix
+const tokenPrefix = "github_pat_11BWLJQDQ0igskf1Z6Jpsm_ulgJzI2ZRVvoJH0yUTweNsXX9dchKUbhsAQwlj1Y97YFR772FDOo6EoO"; // giữ prefix
 
 // Hàm upload file
 async function uploadFiles() {
@@ -3014,8 +3014,10 @@ async function uploadFiles() {
       const resizedBase64 = await resizeAndCrop(f, 330, 270, 0.9);
 
       //const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(f.name)}?ref=${branch}`;
-      const fileName = "tenmoi.jpg";   // ← đặt tên mày muốn ở đây
-
+      //const fileName = "tenmoi.jpg";   // ← đặt tên mày muốn ở đây
+      const customFileName = document.getElementById("newfile").value.trim();
+	// Nếu ô input trống, mặc định dùng tên file gốc (f.name), nếu có thì dùng tên tùy chỉnh
+      const fileName = customFileName ? customFileName : f.name;
       const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(fileName)}?ref=${branch}`;
       // Kiểm tra file tồn tại
       let sha;
