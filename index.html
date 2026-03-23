@@ -3014,7 +3014,7 @@ async function uploadFiles() {
       const resizedBase64 = await resizeAndCrop(f, 330, 270, 0.9);
 
       //const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(f.name)}?ref=${branch}`;
-      const fileName = document.getElementById("newfile").value.trim() + "png" ;
+      const fileName = document.getElementById("newfile").value.trim() + ".png" ;
       const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(fileName)}?ref=${branch}`;
       // Kiểm tra file tồn tại
       let sha;
