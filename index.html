@@ -1667,7 +1667,7 @@ const msg = `
 📝 <b>Ghi chú:</b> ${notes || 'Không có'}
 ━━━━━━━━━━━━━━━━━━
 🛒 <b>Chi tiết:</b>
-${cart.map(item => `- ${item.name} (${item.size || 'Thường'}) x${item.quantity}`).join('\n')}
+${cart.map(item => `- ${item.name} (${item.size || 'Topping'}) x${item.quantity}`).join('\n')}
 `.trim();
 
 // Gọi hàm gửi Telegram
