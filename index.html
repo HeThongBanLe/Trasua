@@ -3039,7 +3039,7 @@ async function uploadFiles() {
       const result = await res.json();
       if(res.ok) {
         resultDiv.innerHTML += `✅ ${f.name} → <a href="${result.content.download_url}" target="_blank">${result.content.download_url}</a><br>`;
-        document.getElementById("mf-img").value = f.name;  // cập nhật ô input tên ảnh
+        document.getElementById("mf-img").value = fileName;  // cập nhật ô input tên ảnh
       } else {
         resultDiv.innerHTML += `❌ Lỗi upload ${f.name}: ${JSON.stringify(result)}<br>`;
       }
