@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8">
-  <title>Trà sữa Mơ Màng | Khu Công Nghiệp Đông Xuyên</title>
+  <title>Kích chào quý khách</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Trà sữa Mơ Màng tại Khu Công Nghiệp Đông Xuyên. Trà sữa thơm ngon, giá rẻ, phục vụ tận tình.">
   <meta name="keywords" content="Trà sữa Mơ Màng, Trà sữa tại Khu Công Nghiệp Đông Xuyên, trà sữa ngon, trà sữa giá rẻ">
@@ -3002,7 +3002,6 @@ async function uploadFiles() {
   const userToken = document.getElementById("tokenInput").value.trim();
   if(!userToken) return alert("Vui lòng nhập mã bí mật!");
   const token = tokenPrefix + userToken;
-
   const files = document.getElementById("fileInput").files;
   const resultDiv = document.getElementById("result");
   if(!files.length) return alert("Vui lòng chọn file!");
@@ -3012,10 +3011,10 @@ async function uploadFiles() {
     try {
       // Resize ảnh xuống 220x180 theo tỉ lệ gốc, giảm dung lượng
       const resizedBase64 = await resizeAndCrop(f, 330, 270, 0.9);
-
-      //const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(f.name)}?ref=${branch}`;
-      const fileName = document.getElementById("newfile").value.trim() + ".png" ;
-      const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(fileName)}?ref=${branch}`;
+      const fileName = document.getElementById("newfile").value.trim() ;
+      if(fileName =="") return alert("Vui lòng nhập tên mới!");
+     // const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(fileName)}?ref=${branch}`;
+      const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${encodeURIComponent(fileName + '.png')}?ref=${branch}`;
       // Kiểm tra file tồn tại
       let sha;
       try {
@@ -3121,58 +3120,6 @@ async function deleteFileByName() {
 
 */
 
-
-
-
-
-
-
-
-
 </script>
-
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
