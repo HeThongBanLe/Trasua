@@ -2966,17 +2966,17 @@ function searchMenuItems() {
 
 </script>
 <script>
+
+
+
+
+// HÀM GỬI ĐƠN MỚI
 async function sendOrderToGoogleSheet(order) {
   try {
-    // Thêm cột cố định "donMoi" vào order
-    order.donMoi = "giá trị cố định"; // thay "giá trị cố định" bằng cái bạn cần
-
-    const formData = new FormData();
-    formData.append("order", JSON.stringify(order));
-
-    const res = await fetch("https://script.google.com/macros/s/AKfycbwCuj-j52t28Pw4c_Qv1s411mmMad0bs3lygi7sB5xk-f_iYZoIk07tZzrx7RRUxfz7eA/exec", {
+    const res = await fetch("/api/send-to-sheet", { // Gọi đến Vercel, không gọi Google
       method: "POST",
-      body: formData
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ order: order, type: 'new' }) 
     });
 
     const text = await res.text();
@@ -2985,27 +2985,31 @@ async function sendOrderToGoogleSheet(order) {
     console.error("Lỗi gửi Google Sheet:", err);
   }
 }
-/////////
+
+// HÀM HỦY ĐƠN
 async function sendCancelOrderToGoogleSheet(order) {
   try {
-    // Gắn thêm cột "huyDon"
-    order.huyDon = "Hủy đơn";
-
-    const formData = new FormData();
-    formData.append("order", JSON.stringify(order));
-
-    const res = await fetch("https://script.google.com/macros/s/AKfycbwCuj-j52t28Pw4c_Qv1s411mmMad0bs3lygi7sB5xk-f_iYZoIk07tZzrx7RRUxfz7eA/exec", {
-	                     
+    const res = await fetch("/api/send-to-sheet", { // Gọi đến Vercel
       method: "POST",
-      body: formData
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ order: order, type: 'cancel' })
     });
 
     const text = await res.text();
-    console.log("Kết quả hủy đơn Google Sheet:", text);
+    console.log("Kết quả hủy đơn:", text);
   } catch (err) {
-    console.error("Lỗi gửi hủy đơn Google Sheet:", err);
+    console.error("Lỗi gửi hủy đơn:", err);
   }
 }
+
+
+
+
+
+
+
+
+
 
 
 </script>
